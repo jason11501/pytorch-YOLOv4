@@ -71,7 +71,7 @@ you can use darknet2pytorch to convert it yourself, or download my converted mod
     ```
 3. Train
 
-    you can set parameters in cfg.py.
+    you can set parameters in cfg.py. Google Colab having GPU T4 whose [GPU_ID] is 0
     ```
      python train.py -g [GPU_ID] -dir [Dataset direction] ...
     ```
