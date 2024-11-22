@@ -41,8 +41,9 @@ A minimal PyTorch implementation of YOLOv4.
 # 0. Weights Download
 
 ## 0.1 darknet
-- baidu(https://pan.baidu.com/s/1dAGEW8cm-dqK14TbhhVetA     Extraction code:dm5b)
-- google(https://drive.google.com/open?id=1cewMfusmPjYWbrnuJRuKhPMwRe_b9PaT)
+- baidu(https://pan.baidu.com/s/1dAGEW8cm-dqK14TbhhVetA     Extraction code:dm5b) 
+or
+- google drive (https://drive.google.com/file/d/1vzYAT8I545RoykF_qS3dqd0BFtXsr3fG/view?usp=sharing)
 
 ## 0.2 pytorch
 you can use darknet2pytorch to convert it yourself, or download my converted model.
