@@ -138,6 +138,7 @@ def image_data_augmentation(mat, w, h, pleft, ptop, swidth, sheight, flip, dhue,
             if img.shape[2] >= 3:
                 hsv_src = cv2.cvtColor(sized.astype(np.float32), cv2.COLOR_RGB2HSV)  # RGB to HSV
                 hsv = cv2.split(hsv_src)
+                hsv = list(hsv)
                 hsv[1] *= dsat
                 hsv[2] *= dexp
                 hsv[0] += 179 * dhue
@@ -423,18 +424,17 @@ def get_image_id(filename:str) -> int:
     >>> no = f"{int(no):04d}"
     >>> return int(lv+no)
     """
-    # raise NotImplementedError("Create your own 'get_image_id' function")
-    # lv, no = os.path.splitext(os.path.basename(filename))[0].split("_")
-    # lv = lv.replace("level", "")
-    # no = f"{int(no):04d}"
-    # return int(lv+no)
 
-    print("You could also create your own 'get_image_id' function.")
-    # print(filename)
-    parts = filename.split('/')
-    id = int(parts[-1][0:-4])
-    # print(id)
-    return id
+    parts = filename.split('.')
+    id_part = parts[-2]  # Get the part before the Roboflow hash
+    if '_' in id_part:
+        id_part = id_part.split('_')
+        if len(id_part) > 1:
+            id = id_part[1]
+            return int(id)
+    else:
+        print(f"Warning: No ID found in filename: {filename}")
+        return -1  # Or some default ID to indicate missing ID
 
 
 if __name__ == "__main__":
