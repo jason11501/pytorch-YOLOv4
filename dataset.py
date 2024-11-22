@@ -409,33 +409,34 @@ class Yolo_dataset(Dataset):
         target['iscrowd'] = torch.zeros((num_objs,), dtype=torch.int64)
         return img, target
 
-
-def get_image_id(filename:str) -> int:
-    """
-    Convert a string to a integer.
-    Make sure that the images and the `image_id`s are in one-one correspondence.
-    There are already `image_id`s in annotations of the COCO dataset,
-    in which case this function is unnecessary.
-    For creating one's own `get_image_id` function, one can refer to
-    https://github.com/google/automl/blob/master/efficientdet/dataset/create_pascal_tfrecord.py#L86
-    or refer to the following code (where the filenames are like 'level1_123.jpg')
-    >>> lv, no = os.path.splitext(os.path.basename(filename))[0].split("_")
-    >>> lv = lv.replace("level", "")
-    >>> no = f"{int(no):04d}"
-    >>> return int(lv+no)
-    """
-
+import re
+#YOU CAN WRITE YOUR OWN GET_IMAGE_ID THAT MATCHES YOUR IMAGE FILENAME
+def get_image_id(filename: str) -> int:
+    # Split filename into parts
     parts = filename.split('.')
-    id_part = parts[-2]  # Get the part before the Roboflow hash
-    if '_' in id_part:
-        id_part = id_part.split('_')
-        if len(id_part) > 1:
-            id = id_part[1]
-            return int(id)
-    else:
-        print(f"Warning: No ID found in filename: {filename}")
-        return -1  # Or some default ID to indicate missing ID
+    # Check the main segment before extensions
+    id_part = parts[-2]  # Second-to-last part (before extension)
 
+    # Prioritize patterns with `_` or `-` to extract IDs
+    if '_' in id_part:
+        sub_parts = id_part.split('_')
+        if sub_parts[1].isdigit():  # Check if the second part is a digit
+            return int(sub_parts[1])
+    elif '-' in id_part:
+        sub_parts = id_part.split('-')
+        if sub_parts[0].isdigit():  # Check if the first part is a digit
+            return int(sub_parts[0])
+
+    # Fallback to general numeric match if specific patterns fail
+    match = re.findall(r'\d+', filename)
+    if len(match) > 5:  # Ensure at least six matches for the sixth element
+        return int(match[5])
+    elif match:  # Use the last match if fewer than six exist
+        return int(match[-1])
+
+    # Return a default ID if no matches
+    print(f"Warning: No ID found in filename: {filename}")
+    return -1
 
 if __name__ == "__main__":
     from cfg import Cfg
