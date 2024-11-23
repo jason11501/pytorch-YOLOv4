@@ -1,4 +1,4 @@
-# Pytorch-YOLOv4
+# Pytorch-YOLOv4 (only need .pth for testing)
 
 ![](https://img.shields.io/static/v1?label=python&message=3.6|3.7&color=blue)
 ![](https://img.shields.io/static/v1?label=pytorch&message=1.4&color=<COLOR>)
@@ -10,7 +10,7 @@ A minimal PyTorch implementation of YOLOv4.
 - More details: http://pjreddie.com/darknet/yolo/
 
 
-- [x] Inference
+- [x] Inference / Test 
 - [x] Train
     - [x] Mosaic
 
