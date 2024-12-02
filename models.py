@@ -502,6 +502,8 @@ if __name__ == "__main__":
             namesfile = 'data/voc.names'
         elif n_classes == 80:
             namesfile = 'data/coco.names'
+        elif n_classes == 1:
+            namesfile = '/content/pytorch-YOLOv4/data/strawberry.names'
         else:
             print("please give namefile")
 
