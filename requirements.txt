@@ -1,5 +1,5 @@
 protobuf==3.20.*
-"numpy<1.24"
+numpy==1.23.*
 torch==1.11.0
 torchvision
 tensorboardX==2.0
@@ -10,3 +10,5 @@ easydict==1.9
 Pillow==7.1.2
 opencv_python_headless
 pycocotools
+tensorboard
+wandb
