@@ -34,8 +34,8 @@ images = data['images']
 annotations = data['annotations']
 for ant in tqdm(annotations):
     id = ant['image_id']
-    # name = os.path.join(images_dir_path, images[id]['file_name'])
-    name = os.path.join(images_dir_path, '{:012d}.jpg'.format(id))
+    name = os.path.join(images_dir_path, images[id]['file_name'])
+    # name = os.path.join(images_dir_path, '{:012d}.jpg'.format(id))
     cat = ant['category_id']
 
     if cat >= 1 and cat <= 11:
